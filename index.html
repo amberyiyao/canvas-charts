@@ -8,9 +8,7 @@
     <title>Document</title>
     <style>
         #canvas {
-            border: 1px solid red;
-            width: 70%;
-            height: auto;
+            border: 1px solid gray;
         }
     </style>
 </head>
@@ -19,35 +17,111 @@
     <canvas id="canvas"></canvas>
     <script>
         let canvas, context;
+        let total = 0;
 
         document.addEventListener('DOMContentLoaded', () => {
             canvas = document.getElementById('canvas');
+            canvas.width = 650;
+            canvas.height = 700;
             context = canvas.getContext('2d');
 
-            console.log(this);
-
-            fetch('./students.json')
-            .then((response) => {
-                return response.json(); 
+            fetch('https://zhou0160.github.io/canvas-charts/fruit.json')
+                .then((response) => {
+                    return response.json();
                 })
-            .then((data) => {
-                console.log(data);
-                
-                })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((data) => {
 
-            drawFirstChart();
-            drawSecondChart();
+                    for (let i = 0; i < data.length; i++) {
+                        total = total + parseInt(data[i].storage);
+                    }
+
+                    drawFirstChart(data);
+                    drawSecondChart(data);
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+
         });
 
-        function drawFirstChart() {
+        function drawFirstChart(data) {
+            let cx = canvas.width / 2;
+            let cy = canvas.height / 4;
+            let startAngle = 0;
+            let radius = 100;
+
+            data.forEach(fruit => {
+                context.strokeStyle = '#444';
+                context.lineWidth = 1;
+                context.fillStyle = fruit.color;
+
+                context.beginPath();
+                let endAngle = ((fruit.storage / total) * (Math.PI * 2)) + startAngle;
+                context.moveTo(cx, cy);
+                context.arc(cx, cy, radius, startAngle, endAngle, false);
+                context.lineTo(cx, cy);
+                context.fill();
+                // context.stroke();
+                context.closePath();
+
+                context.beginPath();
+                context.font = '15px sans-serif';
+                context.fillStyle = '#333';
+                let theta = (startAngle + endAngle) / 2;
+
+                if ((Math.PI * 0.5) < theta && theta < (Math.PI * 1.5)) {
+                    context.textAlign = 'right';
+                } else {
+                    context.textAlign = 'left';
+                }
+
+                let deltaX = Math.cos(theta) * 1.2 * radius;
+                let deltaY = Math.sin(theta) * 1.2 * radius;
+                context.fillText(fruit.name, deltaX + cx, deltaY + cy);
+                context.closePath();
+
+                startAngle = endAngle;
+
+            })
 
         }
 
-        function drawSecondChart() {
+        function drawSecondChart(data) {
+            // console.log(data);
 
+            let cx = canvas.width/6;
+            let cy = canvas.height/2/10+canvas.height/2;
+            let h = 20;
+            let fullStorageForEach = 100; 
+
+            data.forEach(fruit => {
+
+                context.beginPath();
+                context.fillStyle = '#eee';
+                context.rect(cx, cy, 500, h);
+                context.fill();
+                context.closePath();
+                
+                context.beginPath();
+                context.fillStyle = fruit.color;
+                context.lineWidth = 1;
+                let wEach = fruit.storage/fullStorageForEach*500;
+                context.rect(cx, cy, wEach, h);
+                context.fill();
+                context.closePath();
+                
+                context.beginPath();
+                context.font = '15px sans-serif';
+                context.fillStyle = '#333';
+                context.textAlign = 'right';
+                context.fillText(fruit.name, cx-10 , cy+h/1.5 );
+                context.closePath();
+
+                cy = cy + canvas.height/2/10;
+
+            })
         }
     </script>
 </body>

@@ -3,42 +3,42 @@
         "id":1,
         "name":"Apple",
         "storage":30,
-        "color":"f2cbde"
+        "color":"#f2cbde"
     },
     {
         "id":2,
         "name":"Peach",
         "storage":36,
-        "color":"9cafcf"
+        "color":"#9cafcf"
     },  {
         "id":3,
         "name":"Lemon",
         "storage":78,
-        "color":"6ebbab"
+        "color":"#6ebbab"
     },  {
         "id":4,
         "name":"Pear",
         "storage":23,
-        "color":"ffb0b3"
+        "color":"#ffb0b3"
     },  {
         "id":5,
         "name":"Banana",
         "storage":59,
-        "color":"e3e4dc"
+        "color":"#e3e4dc"
     },  {
         "id":6,
         "name":"Grape",
         "storage":99,
-        "color":"c77867"
+        "color":"#c77867"
     },  {
         "id":7,
         "name":"Orange",
         "storage":11,
-        "color":"60b8b9"
+        "color":"#60b8b9"
     },  {
         "id":8,
         "name":"Watermelon",
         "storage":29,
-        "color":"ab9474"
+        "color":"#ab9474"
     }
 ]

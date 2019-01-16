@@ -24,7 +24,7 @@
         "id":5,
         "name":"Banana",
         "storage":59,
-        "color":"#e3e4dc"
+        "color":"#e2bf7b"
     },  {
         "id":6,
         "name":"Grape",
@@ -34,7 +34,7 @@
         "id":7,
         "name":"Orange",
         "storage":11,
-        "color":"#60b8b9"
+        "color":"#879c64"
     },  {
         "id":8,
         "name":"Watermelon",

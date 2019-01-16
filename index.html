@@ -100,14 +100,14 @@
 
                 context.beginPath();
                 context.fillStyle = '#eee';
-                context.rect(cx, cy, 500, h);
+                context.rect(cx, cy, 450, h);
                 context.fill();
                 context.closePath();
                 
                 context.beginPath();
                 context.fillStyle = fruit.color;
                 context.lineWidth = 1;
-                let wEach = fruit.storage/fullStorageForEach*500;
+                let wEach = fruit.storage/fullStorageForEach*450;
                 context.rect(cx, cy, wEach, h);
                 context.fill();
                 context.closePath();

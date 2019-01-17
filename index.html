@@ -42,8 +42,6 @@
                 .catch((error) => {
                     console.log(error);
                 });
-
-
         });
 
         function drawFirstChart(data) {
@@ -53,7 +51,7 @@
             let radius = 100;
 
             data.forEach(fruit => {
-                context.strokeStyle = '#444';
+                // context.strokeStyle = '#444';
                 context.lineWidth = 1;
                 context.fillStyle = fruit.color;
 
@@ -79,7 +77,11 @@
 
                 let deltaX = Math.cos(theta) * 1.2 * radius;
                 let deltaY = Math.sin(theta) * 1.2 * radius;
-                context.fillText(fruit.name, deltaX + cx, deltaY + cy);
+
+                let percentage = Number(fruit.storage / total * 100).toFixed(1); // https://blog.csdn.net/heshichao666/article/details/77040807
+                // console.log(percentage);
+
+                context.fillText(fruit.name + " (" + percentage + "%)", deltaX + cx, deltaY + cy);
                 context.closePath();
 
                 startAngle = endAngle;
@@ -91,10 +93,10 @@
         function drawSecondChart(data) {
             // console.log(data);
 
-            let cx = canvas.width/5.3;
-            let cy = canvas.height/2/10+canvas.height/2;
+            let cx = canvas.width / 5.3;
+            let cy = canvas.height / 2 / 10 + canvas.height / 2;
             let h = 20;
-            let fullStorageForEach = 100; 
+            let fullStorageForEach = 100;
 
             data.forEach(fruit => {
 
@@ -103,23 +105,30 @@
                 context.rect(cx, cy, 450, h);
                 context.fill();
                 context.closePath();
-                
+
                 context.beginPath();
                 context.fillStyle = fruit.color;
                 context.lineWidth = 1;
-                let wEach = fruit.storage/fullStorageForEach*450;
+                let wEach = fruit.storage / fullStorageForEach * 450;
                 context.rect(cx, cy, wEach, h);
                 context.fill();
                 context.closePath();
-                
+
                 context.beginPath();
                 context.font = '15px sans-serif';
                 context.fillStyle = '#333';
                 context.textAlign = 'right';
-                context.fillText(fruit.name, cx-10 , cy+h/1.5 );
+                context.fillText(fruit.name, cx - 10, cy + h / 1.3);
                 context.closePath();
 
-                cy = cy + canvas.height/2/10;
+                context.beginPath();
+                let percentage = Number(fruit.storage / total * 100).toFixed(1); // https://blog.csdn.net/heshichao666/article/details/77040807
+
+                console.log(percentage);
+                context.textAlign='left';
+                context.fillText(percentage+"%", wEach + cx +10, cy + h / 1.3);
+                context.closePath();
+                cy = cy + canvas.height / 2 / 10;
 
             })
         }

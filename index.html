@@ -37,7 +37,7 @@
             canvas2.height = canvas2.width * 3 / 4;
             context2 = canvas2.getContext('2d');
 
-            fetch('https://zhou0160.github.io/canvas-charts/fruit.json')
+            fetch('./fruit.json')
                 .then((response) => {
                     return response.json();
                 })
